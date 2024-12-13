@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %} Update Album Informations {% endblock %}
+
+{% block content %}
+<h2>Please update information below</h2>
+    
+<form action="" method="POST">
+    <label for="title">Title:</label><br>
+    <input type="text" id="title" name="title" value="{{album['title']}}" required><br><br>
+
+    <label for="release_date">Release Date:</label><br>
+    <input type="date" id="release_date" name="release_date" value="{{album['release_date']}}" required><br><br>
+    
+    <label for="genre">Select the genre (optional):</label><br>
+    <select name="genre" id="genre">
+        <option value = "" selected>None</option>
+        {% for genre in genres %}
+            <option value="{{ genre['genre_id'] }}"> {{ genre['name'] }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <button type="submit">Update Album</button>
+</form>
+
+
+{% endblock %}

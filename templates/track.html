@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %} Tracks Informations {% endblock %}
+
+{% block content %}
+<h2>Submit a new Track:</h2>
+    
+<form action="/submit_track" method="POST">
+    <label for="title">Title:</label><br>
+    <input type="text" id="title" name="title" required><br><br>
+    
+    <label for="release_date">Release Date:</label><br>
+    <input type="date" id="release_date" name="release_date" required><br><br>
+    
+    <label for="duration">Duration:</label><br>
+    <input type="text" id="duration" name="duration" required><br><br>
+
+    <label for="genre">Genre:</label><br>
+    <select name="genre" id="genre" required>
+        <option value = "" selected>None</option>
+        {% for genre in genres %}
+            <option value="{{ genre['genre_id'] }}">{{ genre['name'] }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <label for="album">Album ID:</label><br>
+    <select name="album" id="album" >
+        <option value = "" selected>None</option>
+        {% for album in albums %}
+            <option value="{{ album['album_id'] }}">{{ album['title'] }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <label for="artist">Select the artist(s) <br> <em>(Hold ctrl or cmd to select multiple artists)</em>:</label><br>
+    <select name="artist" id="artist" multiple required>
+        {% for artist in artists %}
+            <option value="{{ artist['artist_id'] }}"> {{ artist['name'] }}</option>
+        {% endfor %}
+    </select><br><br>
+    
+    
+    <input type="submit" value="Add Track">
+</form>
+    
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Tracks List</h1>
+        <table class="table table-striped" border="1">
+            <thead>
+                <tr>
+                    <th>Track ID</th>
+                    <th>Title</th>
+                    <th>Release Date</th>
+                    <th>Duration</th>
+                    <th>Genre</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for track in tracks %}
+                <tr>
+                    <td>{{ track['track_id'] }}</td>
+                    <td>{{ track['title'] }}</td>
+                    <td>{{ track['release_date'] }}</td>
+                    <td>{{ track['duration'] }}</td>
+                    <td>{{ track['genre_name'] or 'None' }}</td>
+                    <td>
+                        <a href="/tracks/update/{{track['track_id']}}">
+                            <button>Update</button>
+                        </a>
+                    <form action="/tracks/delete/{{track['track_id']}}" method="POST" stle="display:inline;">
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete this entry');">
+                            Delete
+                        </button>
+                    </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+{% endblock %}
+

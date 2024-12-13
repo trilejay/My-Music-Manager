@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %} Update Genre Informations {% endblock %}
+
+{% block content %}
+<h2>Please update information below</h2>
+    
+<form action="" method="POST">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" value="{{genre['name']}}" required><br><br>
+    
+    <button type="submit">Update Genre</button>
+</form>
+
+
+{% endblock %}

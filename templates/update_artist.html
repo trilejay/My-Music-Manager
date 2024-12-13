@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %} Update Artists Informations {% endblock %}
+
+{% block content %}
+<h2>Please enter information below</h2>
+    
+<form action="" method="POST">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" value="{{artist['name']}}" required><br><br>
+    
+    <label for="email">Email:</label><br>
+    <input type="text" id="email" name="email" value="{{artist['email']}}" required><br><br>
+    
+    <label for="birthdate">Birthdate:</label><br>
+    <input type="date" id="birthdate" name="birthdate" value="{{artist['birthdate']}}" required><br><br>
+
+    <label for="genre">Select the genre:</label><br>
+    <select name="genre" id="genre">
+        <option value = "" selected>None</option>
+        {% for genre in genres %}
+            <option value="{{ genre['genre_id'] }}"> {{ genre['name'] }}</option>
+        {% endfor %}
+    </select><br><br>
+    
+    <button type="submit">Update Artist</button>
+</form>
+
+
+{% endblock %}

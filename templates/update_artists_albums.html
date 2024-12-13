@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %} Update Artist-Album Association {% endblock %}
+
+{% block content %}
+<h2>Update Artist-Albums Association</h2>
+
+<form action="" method="POST">
+    <label for="artist_name">Current Artist:</label><br>
+    <input type="text" id="artist_name" name="artist_name" value="{{ album_data['artist_name'] }}" readonly><br><br>
+
+    <label for="album">Current Album:</label><br>
+    <input type="text" id="album" name="album" value="{{ album_data['album_title'] }}" readonly><br><br>
+
+    <label for="new_artist_id">New Artist:</label><br>
+    <select name="new_artist_id" id="new_artist_id" required>
+        {% for artist in artists %}
+            <option value="{{ artist['artist_id'] }}">{{ artist['name'] }} </option>
+        {% endfor %}
+    </select><br><br>
+
+    <label for="new_album_id">New Album:</label><br>
+    <select name="new_album_id" id="new_album_id" required>
+        {% for album in albums %}
+            <option value="{{ album['album_id'] }}">{{ album['title'] }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <button type="submit">Update Album</button>
+</form>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title class="container mt-5 text-center">{% block title %}My Website {% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<div class="container mt-5 text-center">
+<body>
+    <header>
+        <h1>Music Data Management</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/artist_info.html">Artists</a>
+            <a href="/track">Tracks</a>
+            <a href="/genre">Genres</a>
+            <a href="/album">Albums</a>
+            <!-- <a href="/artists_genres">Artists-Genres</a> -->
+            <a href="/artists_tracks">Artists-Tracks</a>
+            <a href="/artists_albums">Artists-Albums</a>
+            <!-- <a href="/tracks_genres">Tracks-Genres</a> -->
+            <!-- <a href="/albums_genres">Albums-Genres</a> -->
+        </nav>
+    </header>
+</div>
+
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{category}}">
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="container mt-5 text-center">
+        {%block content %}{% endblock %}
+    </div>
+    <footer class="container mt-5 text-center">
+        <p>&copy; 2024 My Flask App. All rights reserved.</p>
+    </footer>
+</body>
+</html>

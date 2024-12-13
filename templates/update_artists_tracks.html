@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %} Update Artist-Track Association {% endblock %}
+
+{% block content %}
+<h2>Update Artist-Track Association</h2>
+
+<form action="" method="POST">
+    <label for="artist">Current Artist:</label><br>
+    <input type="text" id="artist_name" name="artist_name" value="{{ association['artist_name'] }}" readonly><br><br>
+
+    <label for="track">Current Track:</label><br>
+    <input type="text" id="track_title" name="track_title" value="{{ association['track_title'] }}" readonly><br><br>
+
+    <label for="new_artist">New Artist:</label><br>
+    <select name="artist_id" id="new_artist" required>
+        {% for artist in artists %}
+            <option value="{{ artist['artist_id'] }}" {% if artist['artist_id'] == association['artist_id'] %} selected {% endif %}>{{ artist['name'] }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <label for="new_track">New Track:</label><br>
+    <select name="track_id" id="new_track" required>
+        {% for track in tracks %}
+            <option value="{{ track['track_id'] }}" {% if track['track_id'] == association['track_id'] %} selected {% endif %}>{{ track['title'] }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <button type="submit">Update Association</button>
+</form>
+
+{% endblock %}

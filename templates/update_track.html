@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %} Update Track Informations {% endblock %}
+
+{% block content %}
+<h2>Please update track information below</h2>
+    
+<form action="" method="POST">
+    <label for="title">Title:</label><br>
+    <input type="text" id="title" name="title" value="{{track['title']}}"required><br><br>
+    
+    <label for="release_date">Release Date:</label><br>
+    <input type="date" id="release_date" name="release_date" value="{{track['release_date']}}" required><br><br>
+    
+    <label for="duration">Duration:</label><br>
+    <input type="text" id="duration" name="duration" value="{{track['duration']}}" required><br><br>
+
+    <label for="genre">Genre:</label><br>
+    <select name="genre" id="genre" required>
+        <option value = "" selected>None</option>
+        {% for genre in genres %}
+            <option value="{{ genre['genre_id'] }}">{{ genre['name'] }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <label for="album">Album ID:</label><br>
+    <select name="album" id="album" required>
+        <option value = "" selected>None</option>
+        {% for album in albums %}
+            <option value="{{ album['album_id'] }}">{{ album['title'] }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <label for="artist">Who is the artist?:</label><br>
+    <select name="artist" id="artist" required>
+        <option value = "" selected>None</option>
+        {% for artist in artists %}
+            <option value="{{ artist['artist_id'] }}"> {{ artist['name'] }}</option>
+        {% endfor %}
+    </select><br><br>
+    
+    <input type="submit" value="Update Track">
+</form>
+
+
+{% endblock %}
